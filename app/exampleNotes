@@ -1,0 +1,29 @@
+Session ID: 211111111
+Customer Name/Nom du Client: Jhon Doe
+Status: Active
+Time: 01:27
+Total Time: 01:32
+Platform: Windows 7 Google Chrome
+Channel: NTSD General Support - Wireless
+Type: Instant Chat
+Postal Code: A1A1A1
+CTN/Phone: (999) 999-999
+
+
+Status: white
+Service: Rogers_devices
+Creation: 2013-09-03T16:51:20Z
+MSISDN: 19999999999
+IMSI: 123456789012345
+IMEI: 1212121212121212
+Device: Apple iPhone 5
+Device pic adress : http://172.16.224.34:8002/webcmd/devicepic?brand=BlackBerry&model=9700
+Device: Apple iPhone 5
+Device pic adress : http://172.16.224.34:8002/webcmd/devicepic?brand=Apple&model=iPhone 5
+Groups: rogers
+OTASupport: true
+APNs: blackberry.net,goam.com,internet.com,isp.apn,ltedata.apn,lteinternet.apn,ltemobile.apn,media.com,rogers-core-appl1.apn
+DeviceCapa:  Ok
+Single Shot Provisioning: ext1,yes,2012-11-04T12:07:52Z
+Settings: 
+History:

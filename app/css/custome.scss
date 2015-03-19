@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 6, 2015, 5:49:24 PM
+    Author     : Tahmina Khan
+*/
+
+//Define the colors
+
+$brandColor: #da291c;
+$grayBorderColor:#cdcdcd;
+
+//The fixed navbar will overlay your other content, 
+//unless you add padding to the top of the body
+body { //padding-top: 70px; \
+       font-family: "Avenir Next", Arial, sans-serif; 
+
+       background-color: #FFF; 
+       -webkit-font-smoothing: antialiased; 
+       -moz-osx-font-smoothing: grayscale; 
+       letter-spacing: -0.015em;
+}
+
+
+
+
+//Style the navbar
+
+.navbar{
+    background-color: $brandColor;
+   height: 45px;
+   
+}
+
+.navbar-default .navbar-nav>li>a{
+    color: white;
+    font-weight: bolder;
+}
+
+//Gray border color
+.grayBorder {
+  border-radius: 4px 4px 4px 4px;
+-moz-border-radius: 4px 4px 4px 4px;
+-webkit-border-radius: 4px 4px 4px 4px;
+    
+    border: $grayBorderColor solid 2px;
+    
+}
+
+
+// brand background color for the tabs
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    background-color: $brandColor;
+}
+
+.grayBackground{
+   background-color: #F2F2F2;
+}
+
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}

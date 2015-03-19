@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="trackerApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="trackerApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="trackerApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="trackerApp" class="no-js" ng-cloak> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Rogers Wireless Chat tracker</title>
+
+
+        <meta name="description" content="">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+        <!--Bootstrap --> 
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+
+        <!--Custom Css -->
+
+        <link href="css/custome.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <!--Navigation Bar -->
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img class="img-responsive" alt="Brand" src="img/wlc_logo.png" > 
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <nav class="nav-map">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ><a href="#About"> <span class="">Launch Tools</span></a></li>
+
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <!--Start of the notes Section -->
+                <div class="col-md-6" ng-controller="NotesController">
+                    <div class="grayBorder">
+
+                        <div role="tabpanel" class="">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills" role="tablist">
+
+                                <li role="presentation" class="active"><a href="#one" aria-controls="one" role="tab" data-toggle="tab"><span ng-bind="cxname[0]"></span></a></li>
+                                <li role="presentation"><a href="#two" aria-controls="two" role="tab" data-toggle="tab"><span ng-bind="cxname[1]"></span></a></li>
+                                <li role="presentation"><a href="#three" aria-controls="three" role="tab" data-toggle="tab"><span ng-bind="cxname[2]"></span></a></li>
+                                <li role="presentation"><a href="#four" aria-controls="four" role="tab" data-toggle="tab"><span ng-bind="cxname[3]"></span></a></li>
+                                <li role="presentation"><a href="#five" aria-controls="five" role="tab" data-toggle="tab"><span ng-bind="cxname[4]"></span></a></li>
+                                <li role="presentation"><a href="#six" aria-controls="six" role="tab" data-toggle="tab"><span ng-bind="cxname[5]"></span></a></li>
+                            </ul>
+
+                            <hr />
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="one">
+
+                                    <div class="container-fluid">
+                                        <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+                       
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(0)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[0]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[0]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[0]" ng-keyup="formateNotes(event = $event, 0)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy" clip-copy="noteTextAreas[0]">
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(0)" >
+
+                                               
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="two">
+                                    <div class="container-fluid">
+                                       <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(1)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[1]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[1]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[1]" ng-keyup="formateNotes(event = $event, 1)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy"  clip-copy="noteTextAreas[0]">
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(1)" >
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="three">
+
+                                    <div class="container-fluid">
+                                       <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(2)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[2]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[2]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[2]" ng-keyup="formateNotes(event = $event, 2)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy" clip-copy="noteTextAreas[2]" >
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(2)" >
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="four">
+
+                                    <div class="container-fluid">
+                                     <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(3)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[3]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[3]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[3]" ng-keyup="formateNotes(event = $event, 3)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy" clip-copy="noteTextAreas[3]" >
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(3)" >
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="five">
+
+                                    <div class="container-fluid">
+                                       <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(4)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[4]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[4]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[4]" ng-keyup="formateNotes(event = $event, 4)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy" clip-copy="noteTextAreas[4]" >
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(4)" >
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="six">
+
+                                    <div class="container-fluid">
+                                        <form class="">
+                                            <div class="">
+                                                <div class="form-group"> 
+                                                    <div class="">
+                                                        <label class=""> Notes :</label> 
+
+                                                        <select class="form-control"  ng-options="note.title for note in notesList | orderBy:'title' " ng-model="selectedNote" ng-change="addNotes(5)">
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <label class="input-group-addon" ng-bind="textLabel[5]"> </label> 
+                                                    <input type="text" class="form-control" placeholder="" ng-model="textInput[5]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control text-justify" rows="21" cols="60" ng-model="noteTextAreas[5]" ng-keyup="formateNotes(event = $event, 5)">
+                                                    
+                                                
+                                                </textarea> 
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="button" title="Copy" class="btn btn-danger" value="Copy" clip-copy="noteTextAreas[5]">
+                                                <input type="button" title="Clear" class="btn btn-danger" value="Clear" ng-click="clearNotes(5)" >
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <!--End of the notes Section -->
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="grayBorder">
+
+                        <div role="tabpanel">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills grayBackground" role="tablist">
+                                <li role="presentation" class="active"><a href="#scripts" aria-controls="home" role="tab" data-toggle="tab">Scripts</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Device Settings</a></li>
+                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Voice Mail</a></li>
+                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Chat Per Hour</a></li>
+                                <li role="presentation"><a href="#notes" aria-controls="settings" role="tab" data-toggle="tab">Notes</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <!--Start of Scripts tab -->
+                                <div role="tabpanel" class="tab-pane active" id="scripts" ng-controller="scriptsController">
+                                    <hr />  
+                                    <div class="container-fluid">
+                                        <span class="btn btn-primary">General</span>
+                                        <span class="btn btn-danger">Transfer</span>
+                                        <span class="btn btn-danger">Blackberry</span>
+                                        <span class="btn btn-danger">Apple</span>
+
+
+                                        <hr />
+
+                                        <div class="form-group"> 
+                                            <div class="">
+                                                <label class=""> English Scripts :</label> 
+
+                                                <select class="form-control">
+                                                    <option>E-Care pw Reset</option>
+                                                    <option>Ketchup</option>
+                                                    <option>Relish</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea class="form-control text-justify" rows="6" cols="60">I apologize for the inconvenience but we support technical related issue and any Rogers.com troubleshooting is handled by contacting e-care at "http://www.rogershelp.com/chat" I may be able to reset the Password for you, please give me a moment.
+
+
+                                            </textarea>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <input type="button" title="Copy/Save" class="btn btn-danger" value="Copy" >
+                                        </div>
+
+                                        <div class="form-group"> 
+                                            <div class="">
+                                                <label class=""> French Scripts :</label> 
+
+                                                <select class="form-control">
+                                                    <option>E-Care pw Reset</option>
+                                                    <option>Ketchup</option>
+                                                    <option>Relish</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="6" cols="60"> Je m'excuse pour la gêne occasionnée mais nous sommes seulement au Soutien Technique pour les appareil Sans-Fill et tout support concernant  le site Rogers.com est traitée en contactant E-Care à l'adresse: http://www.rogershelp.com/chat . Je suis  peut-être en mesure de réinitialiser le mot de passe pour vous, s'il vous plaît donnez-moi un instant. </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="button" title="Copy/Save" class="btn btn-danger" value="Copy" >
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+                                <div role="tabpanel" class="tab-pane" id="profile">Device Setting</div>
+                                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                <div role="tabpanel" class="tab-pane" id="notes">
+                                    <hr />  
+                                <div class="container-fluid" ng-controller="NotesTabController">
+                                        <div class="form-group">
+
+                                            <textarea class="form-control" rows="30" cols="60"  ng-model="notesTabText">
+
+                                            </textarea>
+                                            
+
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="button" title="Copy/Save" class="btn btn-danger" value="Copy" clip-copy="notesTabText" >
+                                            <input type="button" title="Copy/Save" class="btn btn-danger" value="Clear" ng-click="clearNotesTab()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        
+        
+        
+            <!--        <footer class="footer">
+                        <div class="container">
+                            <p class="text-muted"></p>
+                        </div>
+                    </footer>-->
+
+            <!-- In production use:
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+            -->
+            <script src="bower_components/angular/angular.js"></script>
+            <script src="bower_components/angular-route/angular-route.js"></script>
+
+           
+<!--            
+             <script src="components/ngClip.js" type="text/javascript"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.1.7/ZeroClipboard.min.js"></script>
+            
+            -->
+            
+            <script src="bower_components/ng-clip/src/ngClip.js" type="text/javascript"></script>
+            <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js" type="text/javascript"></script>
+            
+            
+            <!--Custom Angular Component -->
+            <script src="js/app.js" type="text/javascript"></script>
+            <script src="js/controllers/notesController.js" type="text/javascript"></script>
+            <script src="js/controllers/notesTabController.js" type="text/javascript"></script>
+            <script src="js/controllers/scriptsController.js" type="text/javascript"></script>
+            
+            
+            
+            <!--Other library -->
+            <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+            <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+   
+    </body>
+        
+</html>
