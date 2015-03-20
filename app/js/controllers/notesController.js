@@ -32,7 +32,7 @@
         }
 
         
-       console.log(".999.999-1234".replace(/\D/g,''));
+      
 
 
 
@@ -95,14 +95,14 @@
                 $scope.textLabel[index]='CTN:';
                 $scope.textInput[index]=getCTN($scope.noteTextAreas[index])
                 
-                console.log("Esc key was pressed");
+                //console.log("Esc key was pressed");
 
             }else if(keyPressed.keyCode === 112){
             
              $scope.textLabel[index]='IMEI:';
                 $scope.textInput[index]=getIMEI($scope.noteTextAreas[index])
             
-            console.log("F1 is pressed!");
+           // console.log("F1 is pressed!");
             }
         };
 
