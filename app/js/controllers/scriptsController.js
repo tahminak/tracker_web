@@ -13,7 +13,7 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var scriptsController = function ($scope, $http,FrenchParserService) {
+    var scriptsController = function ($scope, $http,FrenchParserService,ReadJasonService,jsonFilesService) {
 
 
         $scope.isClicked = [true];
@@ -24,7 +24,7 @@
         $scope.frenchScriptTitle = "French Script";
 
 
-        //  console.log("In Script controller!");
+        // console.log("In Script controller! : "+jsonFilesService.scriptFile);
 
 
         //Read data from scripts.json
@@ -37,7 +37,27 @@
 
             $scope.scriptsTitles = $scope.scripts[0].submenus;
         });
+//        
+        //Read Json object using ReadJason service
+//        ReadJasonService.readJason(jsonFilesService.scriptFile).then(
+//                function (data){ 
+//                    console.log("In Scripts controller :"+data);
+//                    $scope.scripts=data;
+//                   
+//                  
+//                },
+//                function (statusCode){console.log(statusCode);}
+//                );
+        
+       //console.log('Test');
+       
+       $scope.getScriptsTitles = function () {
 
+
+
+            return $scope.scriptsTitles;
+
+        };
         $scope.onClickScriptTitle = function (index, $event, script, $element) {
 
             $scope.scriptsTitles = $scope.scripts[index].submenus;
@@ -62,13 +82,7 @@
 
         };
 
-        $scope.getScriptsTitles = function () {
-
-
-
-            return $scope.scriptsTitles;
-
-        };
+        
 
         $scope.getClass = function (index) {
 

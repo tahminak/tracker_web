@@ -12,7 +12,7 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var NotesController = function ($scope, $http) {
+    var NotesController = function ($scope, $http,ReadJasonService,jsonFilesService) {
         
         $scope.repeatCount=[0,1,2,3,4,5];
 
@@ -34,19 +34,17 @@
         
       
 
+        
+        //Read Json object using ReadJason service
+        ReadJasonService.readJason(jsonFilesService.notesFile).then(
+                function (data){ $scope.notesList=data;
+             //   console.log(" In Notes Controller : "+"reading "+jsonFilesService.notesFile+" \n"+data)
+             },
+                function (statusCode){console.log(statusCode);}
+                );
+        
+        
 
-
-
-
-
-        //Read data from notes.json
-        $http.get('notes.json').success(function (data) {
-
-            //Store noteslist data to the scope object
-            $scope.notesList = data;
-
-            //     console.log(data);
-        });
 
         $scope.addNotes = function (index) {
 
