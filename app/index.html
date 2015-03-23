@@ -378,7 +378,7 @@
                             <ul class="nav nav-pills grayBackground" role="tablist">
                                 <li role="presentation" class="active"><a href="#scripts" aria-controls="home" role="tab" data-toggle="tab">Scripts</a></li>
                                 <li role="presentation"><a href="#deviceSettingsTab" aria-controls="deviceSettingsTab" role="tab" data-toggle="tab">Device Settings</a></li>
-                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Voice Mail</a></li>
+                                <li role="presentation"><a href="#voiceMailTab" aria-controls="voiceMailTab" role="tab" data-toggle="tab">Voice Mail</a></li>
                                 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Chat Per Hour</a></li>
                                 <li role="presentation"><a href="#notes" aria-controls="settings" role="tab" data-toggle="tab">Notes</a></li>
                             </ul>
@@ -390,7 +390,7 @@
                                 <div role="tabpanel" class="tab-pane active" id="scripts" ng-controller="scriptsController">
                                     <hr />  
                                     <div class="container-fluid">
-                                        <div>
+                                        <div class="text-justify">
                                            <span ng-class="getClass($index)" ng-repeat="script in scripts" style="margin: 5px;" ng-click="onClickScriptTitle($index, $event,script,$element)" ng-model="isClicked[$index]"> {{script.menuname}} </span>
                                        
                                         </div>
@@ -462,7 +462,7 @@
 
 
                                                 <label>Model or OS :</label>
-                                                <select class="form-control"  ng-options="os.modelorosname for os in deviceModelOrOs| orderBy:'modelorosname'" ng-model="selectedMake" ng-change="generateIssues($index)" >
+                                                <select class="form-control"  ng-options="os.modelorosname for os in deviceModelOrOs| orderBy:'modelorosname'" ng-model="selectedModelorOs" ng-change="generateIssues($index)" >
                                                     <option selected="true">select</option>
 
                                                 </select>
@@ -475,8 +475,8 @@
                                             <div class="">
 
 
-                                                <label>Issues :</label>
-                                                <select class="form-control"  ng-options="os.issue for os in issues| orderBy:'issue '" ng-model="selectedModel" ng-change="generateSteps($index)" >
+                                                <label>Issues : </label>
+                                                <select class="form-control"  ng-options="os.issue for os in getIssues()| orderBy:'issue '" ng-model="selectedIssue" ng-change="generateSteps($index)" >
                                                     <option selected="true">select</option>
 
                                                 </select>
@@ -488,6 +488,7 @@
                                          <div class="form-group">
 
                                             <label ng-bind="englishStepsTitle"></label>
+                                            
                                             <textarea class="form-control text-justify" rows="8" cols="60" ng-model="englishSteps">
 
 
@@ -514,7 +515,24 @@
                                 
                                 
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                <div role="tabpanel" class="tab-pane" id="voiceMailTab">
+                                     <div class="container-fluid" ng-controller="VoiceMailTabController">
+                                        <div class="form-group">
+                                            <hr />
+                                            <label>VM Box :</label>
+                                            
+                                            <select class="form-control"  ng-options="box.boxDesc for box in vmBox" ng-model="selectedIssue" ng-change="generateSteps($index)" >
+                                                    <option selected="true">select</option>
+
+                                                </select>
+                                          
+
+                                        </div>
+
+                                        
+                                    </div>
+                                   
+                                </div>
                                 <div role="tabpanel" class="tab-pane" id="notes">
                                     <hr />  
                                     <div class="container-fluid" ng-controller="NotesTabController">
@@ -580,6 +598,7 @@
         <script src="js/controllers/scriptsController.js" type="text/javascript"></script>
         <script src="js/controllers/DeviceSettingsController.js" type="text/javascript"></script>
         
+        <script src="js/controllers/VoiceMailTabController.js" type="text/javascript"></script>
         
         <!-- Services -->
         <script src="js/services/FrenchParserService.js" type="text/javascript"></script>
