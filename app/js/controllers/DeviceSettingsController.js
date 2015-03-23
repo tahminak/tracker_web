@@ -43,7 +43,7 @@
             $scope.devices = data;
             $scope.deviceModelOrOs = $scope.devices[0].modeloros;
             $scope.issues = $scope.deviceModelOrOs[0].issues;
-            console.log($scope.devices);
+           // console.log($scope.devices);
 
 
         });

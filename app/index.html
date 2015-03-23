@@ -379,7 +379,7 @@
                                 <li role="presentation" class="active"><a href="#scripts" aria-controls="home" role="tab" data-toggle="tab">Scripts</a></li>
                                 <li role="presentation"><a href="#deviceSettingsTab" aria-controls="deviceSettingsTab" role="tab" data-toggle="tab">Device Settings</a></li>
                                 <li role="presentation"><a href="#voiceMailTab" aria-controls="voiceMailTab" role="tab" data-toggle="tab">Voice Mail</a></li>
-                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Chat Per Hour</a></li>
+                                <li role="presentation"><a href="#chatPerHourTab" aria-controls="chatPerHourTab" role="tab" data-toggle="tab">Chat Per Hour</a></li>
                                 <li role="presentation"><a href="#notes" aria-controls="settings" role="tab" data-toggle="tab">Notes</a></li>
                             </ul>
 
@@ -391,8 +391,8 @@
                                     <hr />  
                                     <div class="container-fluid">
                                         <div class="text-justify">
-                                           <span ng-class="getClass($index)" ng-repeat="script in scripts" style="margin: 5px;" ng-click="onClickScriptTitle($index, $event,script,$element)" ng-model="isClicked[$index]"> {{script.menuname}} </span>
-                                       
+                                            <span ng-class="getClass($index)" ng-repeat="script in scripts" style="margin: 5px;" ng-click="onClickScriptTitle($index, $event, script, $element)" ng-model="isClicked[$index]"> {{script.menuname}} </span>
+
                                         </div>
 
                                         <hr />
@@ -445,18 +445,18 @@
 
 
                                 <div role="tabpanel" class="tab-pane" id="deviceSettingsTab" ng-controller="DeviceSettingsController">
-                                    
-                                    
-                                    
+
+
+
                                     <hr />  
                                     <div class="container-fluid">
                                         <div>
-                                           <span ng-class="getClass($index)" ng-repeat="device in devices" style="margin: 5px;" ng-click="onClickDeviceTitle($index, $event,device)" ng-model="isClicked[$index]"> {{device.make}} </span>
-                                       
+                                            <span ng-class="getClass($index)" ng-repeat="device in devices" style="margin: 5px;" ng-click="onClickDeviceTitle($index, $event, device)" ng-model="isClicked[$index]"> {{device.make}} </span>
+
                                         </div>
 
                                         <hr />
-                                        
+
                                         <div class="form-group"> 
                                             <div class="">
 
@@ -470,7 +470,7 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="form-group"> 
                                             <div class="">
 
@@ -484,11 +484,11 @@
                                             </div>
 
                                         </div>
-                                        
-                                         <div class="form-group">
+
+                                        <div class="form-group">
 
                                             <label ng-bind="englishStepsTitle"></label>
-                                            
+
                                             <textarea class="form-control text-justify" rows="8" cols="60" ng-model="englishSteps">
 
 
@@ -510,29 +510,242 @@
                                         <div class="form-group">
                                             <input type="button" title="Copy/Save" class="btn btn-danger" value="Copy" clip-copy="frenchSteps">
                                         </div>
-                                        
+
                                     </div>
-                                
-                                
+
+
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="voiceMailTab">
-                                     <div class="container-fluid" ng-controller="VoiceMailTabController">
-                                        <div class="form-group">
-                                            <hr />
-                                            <label>VM Box :</label>
-                                            
-                                            <select class="form-control"  ng-options="box.boxDesc for box in vmBox" ng-model="selectedIssue" ng-change="generateSteps($index)" >
+                                    <div class="container-fluid" ng-controller="VoiceMailTabController">
+
+                                        <!--VoiceMail box -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <hr />
+                                                <label>VM Box :</label>
+
+                                                <select class="form-control"  ng-options="box.boxDesc for box in vmBox" ng-model="selectedVmNode" ng-change="generateRetrievalNo($index)" >
                                                     <option selected="true">select</option>
 
                                                 </select>
-                                          
+
+                                                <label class="btn btn-danger" style="margin: 10px" clip-copy="selectedVmNode.retNoCopy" ng-show="selectedVmNode.retNoCopy" >{{selectedVmNode.retNoCopy}}</label>
+
+
+                                            </div>
+                                        </div>
+
+                                        <!--VoiceMail settings for iOS -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <label class="margin10px labelFont label label-info">iOS</label>
+
+                                                <select class="form-control margin10px" 
+                                                        ng-options='step.name for step in vmIosSteps'
+
+                                                        ng-model="iosVM" ng-change="generateIosText()">
+
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <textarea cols="45" rows="3" class="form-control" ng-model='iOsVmSteps'></textarea>
+
+
+                                                <input type="button" title="Copy" class="btn btn-danger margin10px" value="Copy" clip-copy="iOsVmSteps">
+
+                                            </div>
+                                        </div>
+                                        <!--.VoiceMail settings for iOS -->
+
+
+
+                                        <!--VoiceMail settings for iOS -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <label class="margin10px labelFont label label-info">Android</label>
+
+                                                <select class="form-control margin10px" ng-options='andStep.name for andStep in vmAndroidSteps' ng-model='andVmStep' ng-change="generateAndroidStep()">
+
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <textarea cols="45" rows="3" class="form-control" ng-model="androidSteps"></textarea>
+
+
+                                                <input type="button" title="Copy" class="btn btn-danger margin10px" value="Copy" clip-copy="frenchSteps">
+
+                                            </div>
+                                        </div>
+                                        <!--.VoiceMail settings for iOS -->
+
+
+                                        <!--VoiceMail settings for iOS -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <label class="margin10px labelFont label label-info">Blackberry</label>
+
+                                                <select class="form-control margin10px">
+                                                    <option selected="true">os 10</option>
+                                                    <option>os 6/7</option>
+                                                    <option>os 5 and earlier</option>
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <textarea cols="45" rows="3" class="form-control"></textarea>
+
+
+                                                <input type="button" title="Copy" class="btn btn-danger margin10px" value="Copy" clip-copy="frenchSteps">
+
+                                            </div>
+                                        </div>
+                                        <!--.VoiceMail settings for iOS -->
+
+                                        <!--VoiceMail settings for iOS -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <label class="margin10px labelFont label label-info">Windows</label>
+
+                                                <select class="form-control margin10px">
+                                                    <option selected="true">Win 8</option>
+                                                    <option>Win 7</option>
+                                                    <option>Nokia Lumia</option>
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <textarea cols="45" rows="3" class="form-control"></textarea>
+
+
+                                                <input type="button" title="Copy" class="btn btn-danger margin10px" value="Copy" clip-copy="frenchSteps">
+
+                                            </div>
+                                        </div>
+                                        <!--.VoiceMail settings for iOS -->
+
+
+                                        <!--VoiceMail settings for iOS -->
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <label class="margin10px labelFont label label-info">Other</label>
+
+                                                <select class="form-control margin10px">
+                                                    <option selected="true">Wireless HomePhone</option>
+
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-inline">
+                                            <div class="form-group">
+
+                                                <textarea cols="45" rows="3" class="form-control"></textarea>
+
+
+                                                <input type="button" title="Copy" class="btn btn-danger margin10px" value="Copy" clip-copy="frenchSteps">
+
+                                            </div>
+                                        </div>
+                                        <!--.VoiceMail settings for iOS -->
+
+
+                                        <hr />
+                                    </div>
+
+                                </div>
+
+                                <!--Chat Per hour Tab -->
+                                <div role="tabpanel" class="tab-pane" id="chatPerHourTab" ng-controller="ChatPerHourController">
+                                    <hr />  
+                                    <div class="container-fluid">
+
+                                        <div>
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr class="success">
+                                                        <td>Date</td>
+                                                        <td>Logged In Time</td>
+                                                        <td>Sessions</td>
+                                                        <td>CPH</td>
+                                                    </tr>
+
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{today| date:'yyyy-MM-dd'}}</td>
+                                                        <td>{{todayLogIntime}}</td>
+                                                        <td>{{todaySession}}</td>
+                                                        <td>{{todayCPH}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{yesterday | date:'yyyy-MM-dd'}}</td>
+                                                        <td>{{yestedayLoginTime}}</td>
+                                                        <td>{{yestedaySession}}</td>
+                                                        <td>{{yestedayCPH}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>{{dayBeforeYesterday| date:'yyyy-MM-dd'}}</td>
+                                                        <td>{{dayBeforeYesterdayLogintime}}</td>
+                                                        <td>{{dayBeforeYesterdaySession}}</td>
+                                                        <td>{{dayBeforeYesterdayCPH}}</td>
+                                                    </tr>
+
+
+                                                </tbody>
+
+                                            </table>
 
                                         </div>
 
-                                        
+                                        <div class="form-group">
+
+                                            <input type="button" title="Copy/Save" class="btn btn-danger" value="Refresh" ng-click="clearNotesTab()">
+                                        </div>
                                     </div>
-                                   
                                 </div>
+
+                                <!--Notes Tab -->
                                 <div role="tabpanel" class="tab-pane" id="notes">
                                     <hr />  
                                     <div class="container-fluid" ng-controller="NotesTabController">
@@ -591,14 +804,16 @@
 
         <!--Custom Angular Component -->
         <script src="js/app.js" type="text/javascript"></script>
-        
+
         <!-- Controllers -->
         <script src="js/controllers/notesController.js" type="text/javascript"></script>
         <script src="js/controllers/notesTabController.js" type="text/javascript"></script>
         <script src="js/controllers/scriptsController.js" type="text/javascript"></script>
         <script src="js/controllers/DeviceSettingsController.js" type="text/javascript"></script>
-        
+
         <script src="js/controllers/VoiceMailTabController.js" type="text/javascript"></script>
+        <script src="js/controllers/ChatPerHourController.js" type="text/javascript"></script>
+        
         
         <!-- Services -->
         <script src="js/services/FrenchParserService.js" type="text/javascript"></script>
