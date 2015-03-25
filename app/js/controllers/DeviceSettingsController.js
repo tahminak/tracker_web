@@ -13,7 +13,7 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var DeviceSettingsController = function ($scope, $http, $log, ReadJasonService, FrenchParserService, jsonFilesService) {
+    var DeviceSettingsController = function ($scope, $http, $log, ReadFileService, FrenchParserService, jsonFilesService) {
 
         $scope.devices;
         $scope.isClicked = [true];
@@ -23,32 +23,19 @@
         $scope.frenchStepsTitle = "Steps in French";
 
 
-//        
-//        ReadJasonService.readJason(jsonFilesService.notesFile).then(
-//                function (data){ $scope.deviceSettingsObject=data;},
-//                function (statusCode){console.log(statusCode);}
-//                );
-//        
-//        
-        /// console.log('It is in the console ! :'+jsonFilesService.notesFile)
 
 
-
-        //Read data from scripts.json
-        $http.get(jsonFilesService.devicesFile).success(function (data) {
-
-            //Store t data to the scope object
-            // $scope.notesList = data;
-
-            $scope.devices = data;
-            $scope.deviceModelOrOs = $scope.devices[0].modeloros;
-            $scope.issues = $scope.deviceModelOrOs[0].issues;
-           // console.log($scope.devices);
-
-
-        });
-
-
+        //Read Json object using ReadJason service
+        ReadFileService.readJason(jsonFilesService.devicesFile).then(
+                function (data) {
+                    $scope.devices = data;
+                    $scope.deviceModelOrOs = $scope.devices[0].modeloros;
+                    $scope.issues = $scope.deviceModelOrOs[0].issues;
+                },
+                function (statusCode) {
+                    console.log(statusCode);
+                }
+        );
 
 
         $scope.getClass = function (index) {
@@ -72,10 +59,12 @@
             $scope.deviceModelOrOs = $scope.devices[index].modeloros;
             $scope.issues = $scope.devices[index].modeloros[0].issues;
             $scope.issueTitles;
-            $scope.selectedModel=true;
+            $scope.selectedModel = true;
 
             $log.info($scope.deviceModelOrOs);
             $log.info($scope.issues);
+
+            console.log(index);
 
             //Selected item is clicked
             $scope.isClicked[index] = true;
@@ -98,18 +87,18 @@
 
         $scope.generateIssues = function (index) {
 
-           
 
-           // $scope.issueTitles=
+
+            // $scope.issueTitles=
             $scope.issues = $scope.selectedModelorOs.issues;
 
-             $log.info($scope.issues);
+            $log.info($scope.issues);
 
 
         };
 
-        $scope.getIssues=function (){
-            
+        $scope.getIssues = function () {
+
             return $scope.issues;
         }
         $scope.generateSteps = function (index) {

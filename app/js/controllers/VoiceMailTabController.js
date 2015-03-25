@@ -12,7 +12,7 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var VoiceMailTabController = function ($scope,$log, $http,ReadJasonService,jsonFilesService) {
+    var VoiceMailTabController = function ($scope,$log, $http,ReadFileService,jsonFilesService) {
     $scope.selectedRetreivalNO="+1-000-000-0000";
     $scope.vmBox= [
         {

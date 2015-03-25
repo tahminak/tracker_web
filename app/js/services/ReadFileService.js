@@ -17,18 +17,22 @@
     var app = angular.module("trackerApp");
 
 
-    app.service('ReadJasonService', function ($http,$log,$q) {
-            var deferred=$q.defer();
+    app.service('ReadFileService', function ($http,$log,$q) {
+             //var deferred;
 
             this.readJason = function (file) {
+                
+                //declare deferred object
+               var deferred=$q.defer();
                 //Read data from Json file
                 $http.get(file).success(function (data, status, headers, config) {
 
+                  
                   deferred.resolve(data);
-                //  $log.info(data);
+             
                     
                 })
-                       .error(function (data, status, headers, config) {
+                .error(function (data, status, headers, config) {
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
                        deferred.reject(status);

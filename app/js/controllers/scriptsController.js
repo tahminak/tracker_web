@@ -13,44 +13,30 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var scriptsController = function ($scope, $http,FrenchParserService,ReadJasonService,jsonFilesService) {
+    var scriptsController = function ($scope, $http,FrenchParserService,ReadFileService,jsonFilesService) {
 
 
         $scope.isClicked = [true];
 
-        $scope.scripts = [];
+        $scope.scripts={};
         $scope.scriptsTitles;
         $scope.englishScriptTitle = "English Script";
         $scope.frenchScriptTitle = "French Script";
-
-
-        // console.log("In Script controller! : "+jsonFilesService.scriptFile);
-
-
-        //Read data from scripts.json
-        $http.get('scripts.json').success(function (data) {
-
-            //Store t data to the scope object
-            // $scope.notesList = data;
-            $scope.scripts = data.scripts;
-            // console.log($scope.scripts);
-
-            $scope.scriptsTitles = $scope.scripts[0].submenus;
-        });
-//        
-        //Read Json object using ReadJason service
-//        ReadJasonService.readJason(jsonFilesService.scriptFile).then(
-//                function (data){ 
-//                    console.log("In Scripts controller :"+data);
-//                    $scope.scripts=data;
-//                   
-//                  
-//                },
-//                function (statusCode){console.log(statusCode);}
-//                );
+        $scope.initData;
         
-       //console.log('Test');
-       
+        
+        //Read Json file using ReadFile Service
+        ReadFileService.readJason(jsonFilesService.scriptFile).then(
+                function (data){ $scope.initData=data;
+                                  $scope.scripts=$scope.initData.scripts;
+                                  $scope.scriptsTitles = $scope.scripts[0].submenus;
+                                  },
+                function (statusCode){console.log(statusCode);}
+                );
+        
+        
+        $scope.selectedScript=$scope.scripts[0];
+
        $scope.getScriptsTitles = function () {
 
 
@@ -62,6 +48,8 @@
 
             $scope.scriptsTitles = $scope.scripts[index].submenus;
 
+
+            console.log(script);
 
             //Selected item is clicked
             $scope.isClicked[index] = true;
@@ -99,11 +87,11 @@
         }
         $scope.generateScript = function () {
 
-            $scope.englishScriptTitle = $scope.selectedValue.submenusripts[0].scripttitle;
-            $scope.frenchScriptTitle = $scope.selectedValue.submenusripts[1].scripttitle;
-            $scope.englishScript = $scope.selectedValue.submenusripts[0].script;
-            $scope.frenchScript = FrenchParserService.parse($scope.selectedValue.submenusripts[1].script);
-            console.log($scope.selectedValue.submenusripts[0]);
+            $scope.englishScriptTitle = $scope.selectedScript.submenusripts[0].scripttitle;
+            $scope.frenchScriptTitle = $scope.selectedScript.submenusripts[1].scripttitle;
+            $scope.englishScript = $scope.selectedScript.submenusripts[0].script;
+            $scope.frenchScript = FrenchParserService.parse($scope.selectedScript.submenusripts[1].script);
+            console.log($scope.selectedScript.submenusripts[0]);
 
         };
 

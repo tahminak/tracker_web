@@ -12,7 +12,7 @@
     //Tracker App module
     var app = angular.module("trackerApp");
 
-    var NotesController = function ($scope, $http,ReadJasonService,jsonFilesService) {
+    var NotesController = function ($scope, $http,ReadFileService,jsonFilesService,ReadResourceService) {
         
         $scope.repeatCount=[0,1,2,3,4,5];
 
@@ -26,7 +26,8 @@
         var customerInfo = "";
         var deviceInfo = "";
 
-        var initialTextArea = "Please copy the example notes provided in notes tab , paste here and press F5 to format the text";
+        var initialTextArea = "Please copy the example notes provided in notes tab , paste here and press F5 to format the text"+
+                               "\n\nOnce you have formatted Cx info ,press ESC to get customer name and phone number. Press F1 to get IMEI";
         for (var i = 0; i < 6; i++) {
             $scope.noteTextAreas[i] = initialTextArea;
         }
@@ -36,7 +37,7 @@
 
         
         //Read Json object using ReadJason service
-        ReadJasonService.readJason(jsonFilesService.notesFile).then(
+        ReadFileService.readJason(jsonFilesService.notesFile).then(
                 function (data){ $scope.notesList=data;
              //   console.log(" In Notes Controller : "+"reading "+jsonFilesService.notesFile+" \n"+data)
              },
@@ -45,6 +46,9 @@
         
         
 
+        $scope.testRes=ReadResourceService.getData();
+        
+        console.log($scope.testRes);
 
         $scope.addNotes = function (index) {
 
