@@ -25,7 +25,7 @@
             $controller = _$controller_;
         }));
 
-        it("should be registered", function () {
+        it("App should be registered", function () {
 
             expect(module).not.toEqual(null);
         });
