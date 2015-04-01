@@ -1,9 +1,10 @@
 
 
 
-'use strict';
+
 
 (function () {
+    'use strict';
     describe("tracker_web: Testing Modules", function () {
 
         // describe("App Module: ",function (){

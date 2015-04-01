@@ -1,4 +1,3 @@
-
 //Test Json File
 (function () {
     'use strict';
