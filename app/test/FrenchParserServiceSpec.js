@@ -24,6 +24,7 @@
         it('Should parse the correct string',function (){
 
             expect(frenchPerserSrv.parse(testStr)).toEqual(frnStr);
+          
         });
         
     });

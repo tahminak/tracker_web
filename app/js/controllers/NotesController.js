@@ -64,7 +64,7 @@
 
         $scope.formateNotes = function (keyPressed, index) {
 
-            if (keyPressed.keyCode === 116) {
+            if (keyPressed.keyCode === 122) {
 
 
           
